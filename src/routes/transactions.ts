@@ -4,6 +4,18 @@ import { randomUUID } from "node:crypto"
 import { knex } from "../database"
 import { checkSessionIdExists } from "../middlewares/check-session-id-exists"
 
+// Testes Unitários: unidade da sua aplicação
+// Testes de Integração: comunicação entre duas ou mais unidades
+// Testes e2e (ponta a ponta): simulam um usuário operando na aplicação
+
+// Front-end: abre a página de login, digite o texto leonardo@gmail.com no campo com ID email e clique no botão
+// Back-end: chamadas HTTP, WebSockets
+
+// Pirâmide de testes: 
+// 1. E2E => não dependem de nenhuma tecnologia, não dependem da arquitetura.
+// 2. Integração
+// 3. Unitários
+
 export async function transactionsRoutes(app: FastifyInstance) {
    app.get('/', {preHandler: [checkSessionIdExists]}, async (request, reply) => {
       const { sessionId } = request.cookies
